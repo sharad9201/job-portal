@@ -11,9 +11,9 @@
             <td>{{$post['title']}}</td>
             <td>{{$post['description']}}</td>
             <td>{{$post->user['name']}}</td>
-            <img src="{{ asset('uploads/users/' . Auth::user()->image) }}" alt="" width="40"
-                    height="30" class="d-inline-block align-text-top">
-                {{ Auth::user()->name }}'s Posts
+            <td><img src="{{ asset('/uploads/images/' . $post->image) }}" alt="" width="150px"
+                height="150px"></td>
+        <td>
         </tr>
         @endforeach
     </table>

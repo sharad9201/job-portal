@@ -61,7 +61,7 @@ class PostController extends Controller
             $file->move($path, $filename);
             $data['image'] = $filename;
         }
-        dd($data);
+        // dd($data);
         Post::create($data);
         return redirect()->route('posts.index')->with('success', 'Post Created Successfully');
 
