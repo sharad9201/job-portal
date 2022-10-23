@@ -49,18 +49,19 @@ class PostController extends Controller
         $data['user_id'] = Auth::user()->id;
         $data['title'] = $request->title;
         $data['description'] = $request->description;
-        // $path = public_path('uploads/images');
-        // if (!File::isDirectory($path)) {
-        //     File::makeDirectory($path, 0777, true, true);
-        // }
+        $path = public_path('uploads/images');
+        if (!File::isDirectory($path)) {
+            // 0777 is an read and write permission
+            File::makeDirectory($path, 0777, true, true);
+        }
 
-        // if ($request->file('image')) {
-        //     $file = $request->file('image');
-        //     $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-        //     $file->move($path, $filename);
-        //     $data['image'] = $filename;
-        // }
-        // dd($data);
+        if ($request->file('image')) {
+            $file = $request->file('image');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move($path, $filename);
+            $data['image'] = $filename;
+        }
+        dd($data);
         Post::create($data);
         return redirect()->route('posts.index')->with('success', 'Post Created Successfully');
 
