@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ApplicationRequest;
-use Illuminate\Http\Request;
-use App\Http\Requests\PostRequest;
 use App\Models\Application;
+use Illuminate\Http\Request;
+use App\Http\Requests\ApplicationRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use File;
-use PDO;
 
-class PostController extends Controller
+
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,9 +20,28 @@ class PostController extends Controller
     public function index()
     {
         //
-        // $user_id = Auth::user()->id;
-        $posts = Post::paginate();
-        return view('post.index', compact('posts'));
+        $user_id = Auth::user()->id;
+        // dd($user_id);
+        $post=Post::find(1);
+        dd($post);
+        $post_id = Post::where('id',$post)->get();
+        dd($post_id);
+
+        return view('user.index', compact('posts'));
+        return view('user.index');
+       
+            
+            // $user_id = Auth::user()->id;
+            // $post_id = Post::all();
+            // // $post_id = Application::all();
+            // // $posts = Post::where('user_id', $user_id)->get();
+
+            // $posts = Post::where('post_id', $post_id)->get();
+            // // dd($posts);
+            // return view('user.index', compact('posts'));
+            // return view('user.index');
+
+        
     }
 
     /**
@@ -33,8 +51,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
-        return view('post.create');
+        return view('user.create');
     }
 
     /**
@@ -43,45 +60,19 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PostRequest $request)
+    public function store(ApplicationRequest $request, Post $post)
     {
         //
 
         $data['user_id'] = Auth::user()->id;
-        $data['title'] = $request->title;
-        $data['description'] = $request->description;
-        $path = public_path('uploads/images');
-        if (!File::isDirectory($path)) {
-            // 0777 is an read and write permission
-            File::makeDirectory($path, 0777, true, true);
-        }
-
-        if ($request->file('image')) {
-            $file = $request->file('image');
-            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-            $file->move($path, $filename);
-            $data['image'] = $filename;
-        }
-        // dd($data);
-        Post::create($data);
-        return redirect()->route('posts.index')->with('success', 'Post Created Successfully');
-
-    }
-
-    // aplly for the post
-
-    public function apply($id){
+        // $data['user_id'] = Post::post()->id;
         
-        $post= Post::find($id);
-        return view('post.apply',compact('post'));
-    }
+        
 
-    public function apply_store($post_id, ApplicationRequest $request){
+        // $data['post_id'] = Post::all();
+        // $data['post_id'] = Post::find(1);
+        // $data = Post::find(1);
 
-        $data['user_id'] = Auth::user()->id;
-       
-        // $post = Post::find($id);
-        $data['post_id'] = $post_id;
 
         $data['name'] = $request->name;
         $data['description'] = $request->description;
@@ -97,7 +88,7 @@ class PostController extends Controller
             $file->move($path, $filename);
             $data['image'] = $filename;
         }
-        
+        // dd($data);
         Application::create($data);
         return redirect()->route('users.index')->with('success', 'Applied  Successfully');
 
@@ -122,7 +113,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        // make constructor 
+        //
     }
 
     /**

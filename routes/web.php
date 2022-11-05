@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,7 +27,14 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 
-Route::group(['middleware'=>['auth','isAdmin']],function(){
+// Route::group(['middleware'=>['auth','isAdmin']],function(){
+//     Route::resource('/posts',PostController::class);
+    
+// });
+Route::group(['middleware'=>['auth']],function(){
     Route::resource('/posts',PostController::class);
+    Route::get('/posts/{id}/apply',[PostController::class,'apply'])->name('posts.apply');
+    Route::post('/posts/{id}/apply',[PostController::class,'apply_store'])->name('posts.apply');
     
 });
+Route::resource('/users',UserController::class);

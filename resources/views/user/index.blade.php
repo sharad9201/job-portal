@@ -11,16 +11,14 @@
         <tr>
             <td>{{$post['title']}}</td>
             <td>{{$post['description']}}</td>
-            <td>{{$post->user['name']}}</td>
             <td><img src="{{ asset('/uploads/images/' . $post->image) }}" alt="" width="150px"
                 height="150px"></td>
-            <td>@if (auth()->user()->isAdmin())
-                <a href="{{route('posts.edit',$post->id)}}">Edit</a>
-                
-            @endif
-            <a href="{{route('posts.apply',$post->id)}}">Apply</a>
             </td>
+            
+                <td><a href='{{route('users.create')}}'> apply</a></td>
+            </tr>
+            
+        </tr>
         @endforeach
     </table>
 </div>  
-
