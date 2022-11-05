@@ -2,6 +2,6 @@
     Admin
     
     <div>
-        <a href="">Create a Job Post</a>
+        <a href="{{ route('posts.create') }}">Create a Job Post</a>
     </div>
 </div>

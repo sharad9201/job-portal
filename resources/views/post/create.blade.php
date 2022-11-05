@@ -1,4 +1,6 @@
-@extends('layouts.app')<div>
+@extends('layouts.app')
+
+<div>
     create post
 </div>
 
@@ -29,3 +31,4 @@
     <button type="submit" class="btn btn-primary">Create</button>
 </form>
 </div>
+

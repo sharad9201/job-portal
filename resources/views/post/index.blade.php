@@ -1,3 +1,4 @@
+
 <div class="modal-dialog modal-dialog-scrollable">
     <table border="1px">
         <tr>
@@ -17,4 +18,5 @@
         </tr>
         @endforeach
     </table>
-</div>
+</div>  
+
