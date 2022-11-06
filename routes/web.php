@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('/home');
 });
 
 Auth::routes();
@@ -35,6 +35,8 @@ Route::group(['middleware'=>['auth']],function(){
     Route::resource('/posts',PostController::class);
     Route::get('/posts/{id}/apply',[PostController::class,'apply'])->name('posts.apply');
     Route::post('/posts/{id}/apply',[PostController::class,'apply_store'])->name('posts.apply');
-    
+    Route::get('/view_more/{id}',[PostController::class,'view_more'])->name('posts.view_more');
+    Route::get('/application/{id}',[PostController::class,'view_users_data'])->name('posts.application_array');
+
 });
 Route::resource('/users',UserController::class);

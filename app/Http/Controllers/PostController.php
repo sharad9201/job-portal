@@ -26,6 +26,12 @@ class PostController extends Controller
         return view('post.index', compact('posts'));
     }
 
+    public function view_more($id){
+
+        $post = Post::find($id);
+        return view('post.view_more', compact('post'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -99,10 +105,19 @@ class PostController extends Controller
         }
         
         Application::create($data);
-        return redirect()->route('users.index')->with('success', 'Applied  Successfully');
+        return redirect()->route('posts.index')->with('success', 'Applied  Successfully');
 
     }
+ 
+    // Admin to see the users application
 
+    public function view_users_data($id){
+
+        // $apply = Auth::user()->id;
+        $apply = Application::find($id);
+         return view('applications.application_array', compact('apply'));
+
+    }
     /**
      * Display the specified resource.
      *

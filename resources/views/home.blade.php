@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            {{-- <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
                 <div class="card-body">
@@ -15,9 +15,22 @@
                     @endif
 
                     {{ __('You are logged in!') }}
-                </div>
-            </div>
+
+
+                </div> 
+            </div> --}}
+
+
+
         </div>
     </div>
+
+    <div class="d-flex justify-content-center">
+        <div class="card" style="width: 40rem">
+            
+        </div>
+    </div>
+    
 </div>
 @endsection
+@yield('jobs')
