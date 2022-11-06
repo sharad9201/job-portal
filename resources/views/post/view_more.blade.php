@@ -19,7 +19,7 @@
         <div>
             @if (auth()->user()->isAdmin())
                 <a href="{{route('posts.edit',$post->id)}}">Edit</a>
-                
+                <a href="{{ route('applications.application_array',$post->id) }}"> See the Applicants</a>
             @endif
             <a href="{{route('posts.apply',$post->id)}}">Apply</a>
         </div>

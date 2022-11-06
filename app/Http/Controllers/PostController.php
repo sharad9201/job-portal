@@ -113,9 +113,11 @@ class PostController extends Controller
 
     public function view_users_data($id){
 
-        // $apply = Auth::user()->id;
-        $apply = Application::find($id);
-         return view('applications.application_array', compact('apply'));
+        // dd($post_id);
+        $post = Post::find($id);
+        // relation calling to variable from Post model
+        $applications =  $post->application;
+         return view('application.application_array', compact('applications'));
 
     }
     /**
