@@ -19,6 +19,11 @@
         <div>
             @if (auth()->user()->isAdmin())
                 <a href="{{route('posts.edit',$post->id)}}">Edit</a>
+                <form action="{{route('posts.destroy',$post->id)}}" method="POST">
+                    @method('Delete')
+                    @csrf
+                    <button class="btn btn-danger" type="submit"> Delete</button>
+                </form>
                 <a href="{{ route('applications.application_array',$post->id) }}"> See the Applicants</a>
             @endif
             <a href="{{route('posts.apply',$post->id)}}">Apply</a>

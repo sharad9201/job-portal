@@ -140,6 +140,9 @@ class PostController extends Controller
     public function edit($id)
     {
         // make constructor 
+
+        $post = Post::find($id);
+        return view('post.edit',compact('post'));
     }
 
     /**
@@ -149,9 +152,26 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostRequest $request, $id)
     {
-        //
+        $post = post::find($id);
+        $post->title = $request->title;
+        $post->description = $request->description;
+        if ($request->file('image')) {
+            $path = public_path('uploads/images');
+            $f1 = public_path() . '/uploads/images/' . $post->image;
+            File::delete($f1);
+            $file = $request->file('image');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move($path, $filename);
+            $post->image = $filename;
+
+        }
+        $post->update();
+        return redirect()->route('posts.index')->with('success', 'Post Updated Successfully');
+
+
+
     }
 
     /**
@@ -163,5 +183,15 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+        // $application_id = Post::application();
+        $post = Post::find($id);
+        if (!empty($post->image)) {
+            $f1 = public_path() . '/uploads/images/' . $post->image;
+            File::delete($f1);
+        }
+        // dd($post);
+        $post->application()->delete();
+        $post->delete();
+        return redirect()->route('posts.index')->with('success', 'Post Deleted Successfully');
     }
 }
