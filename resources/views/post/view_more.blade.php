@@ -4,12 +4,15 @@
 <div class="container">
 
     <div class="card" style="width:100% height:50%">
+        <div>
+            
+        </div>
         <div class="card-title">
             {{$post->title}}
         </div>
         <div class="">
-            <img src="{{ asset('/uploads/images/' . $post->image) }}" alt="" width="150px"
-                height="150px">
+            <img src="{{ asset('/uploads/images/' . $post->image) }}" alt="" width="50%"
+                height="10%">
         </div>
         <div class="card-text">
             
