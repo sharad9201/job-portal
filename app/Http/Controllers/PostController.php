@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use File;
 use Illuminate\Support\Facades\DB;
-use PDO;
+use Illuminate\Support\Facades\Mail;
 
 class PostController extends Controller
 {
@@ -105,7 +105,11 @@ class PostController extends Controller
             $data['image'] = $filename;
         }
         
-        Application::create($data);
+        $app = Application::create($data);
+        Mail::send('email.apply',$app->toArray(),
+        function($message){
+            $message->to('admin@admin.com', 'Admin')->subject('Application Applied');
+        });
         return redirect()->route('posts.index')->with('success', 'Applied  Successfully');
 
     }
