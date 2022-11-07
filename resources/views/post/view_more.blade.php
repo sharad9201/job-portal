@@ -25,6 +25,7 @@
                     <button class="btn btn-danger" type="submit"> Delete</button>
                 </form>
                 <a href="{{ route('applications.application_array',$post->id) }}"> See the Applicants</a>
+                
             @endif
             <a href="{{route('posts.apply',$post->id)}}">Apply</a>
         </div>

@@ -9,6 +9,7 @@ use App\Models\Application;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use File;
+use Illuminate\Support\Facades\DB;
 use PDO;
 
 class PostController extends Controller
@@ -119,6 +120,17 @@ class PostController extends Controller
         $applications =  $post->application;
          return view('application.application_array', compact('applications'));
 
+    }
+
+    public function download($id){
+        // return dd("ok");
+        // $download = Application::find($id);
+        // $file = $download->image;
+        $images = DB::table('applications')->where('id',$id)->first();
+        // dd($images);
+        $pathToFile = public_path("uploads/images/{$images->image}");
+        // dd($file);
+       return response()->download($pathToFile);
     }
     /**
      * Display the specified resource.

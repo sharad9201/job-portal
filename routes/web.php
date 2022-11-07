@@ -40,6 +40,8 @@ Route::group(['middleware'=>['auth']],function(){
     Route::resource('/posts',PostController::class);
     Route::get('/posts/{id}/apply',[PostController::class,'apply'])->name('posts.apply');
     Route::post('/posts/{id}/apply',[PostController::class,'apply_store'])->name('posts.apply');
+    Route::get('/cv/download/{id}',[PostController::class,'download'])->name('download');
+
    
     Route::get('/view_more/{id}',[PostController::class,'view_more'])->name('posts.view_more');
     Route::group(['middleware'=>['isAdmin']],function(){

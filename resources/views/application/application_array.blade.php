@@ -15,6 +15,9 @@ application
             <td><img src="{{ asset('/uploads/images/' . $application->image) }}" alt="" width="150px"
                 height="150px"></td>
             </td>
+            <td>
+                <a href="{{route('download',$application->id)}}">Download</a>
+            </td>
             
             </tr>
             
